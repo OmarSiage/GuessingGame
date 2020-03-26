@@ -1,9 +1,16 @@
-//Get Required HTML Elements
-//Get all the boxes!
-var boxes = document.getElementsByClassName("row_object");
+//Some Variables
 var colors = []
 var clicked = []
 var not_available = []
+
+var max_score = 0;
+var current_Score = 0;
+
+//Get Required HTML Elements
+var boxes = document.getElementsByClassName("row_object");
+var reset = document.getElementById("resetButt")
+var currentScore  = document.getElementsByClassName("currentScore");
+var maxScore  = document.getElementsByClassName("bestScore");
 
 
 //I want to begin by changing the colors of the squares everytime page is loaded / new game started
@@ -26,11 +33,19 @@ function get_colors(amount){
 
 
 //I'll need a function that can shuffle the array
-/*
-
-
-*/
 function shuffle(arr){
+	//Little overkill to do 30 times, but it's just to ensure proper shuffling.
+	for (var i = 0; i < 30; i++) {
+		//Pick a random number between 0 and length - 1 of the array
+		let switch_this_index = Math.floor(Math.random() * arr.length);
+		let with_this_index = Math.floor(Math.random() * arr.length);
+
+		let temp_val = arr[switch_this_index];
+
+		arr[switch_this_index] = arr[with_this_index];
+		arr[with_this_index] = temp_val;
+	}
+
 	return arr;
 }
 
@@ -51,24 +66,33 @@ function pausecomp(millis)
 
 //I need a function that sets a listener on all buttons!
 function setListeners(){
-	console.log(colors[2])
 	for (var i = 0; i < boxes.length; i++) {
 		boxes[i].addEventListener("click",function(){
 			this.style.transition = "all 1s";
 			setColor(this);
 		})
 	}
+
+	reset.addEventListener("click",function(){
+		resetGame();
+	})
 }
 
 
+
 function setColor(clicked_square){
-	index_clicked = Number(clicked_square.id);
-	clicked_square.style.background = colors[index_clicked];
-	clicked.push(clicked_square);
-	
+	if(!(not_available.includes(clicked_square))){
+		index_clicked = Number(clicked_square.id);
+		clicked_square.style.background = colors[index_clicked];
+		clicked.push(clicked_square);
+		console.log(clicked)
+		not_available.push(clicked_square);
+	}
+
 	if(clicked.length == 2){
 		checkIfCorrect(clicked);
-		clicked = [];}
+		clicked = [];
+	}
 }
 
 
@@ -76,31 +100,55 @@ function setColor(clicked_square){
 
 
 function checkIfCorrect(arr){
-	if(!clicked[0].style.background === clicked[1].style.background){
-		console.log("naw");
+	//Wrong Answer - Update Score, Change Colors of Selectors
+	if(!(clicked[0].style.background === clicked[1].style.background)){
 		clicked[0].style.background = 'black';
-		clicked[1].style.background = "black";}
+		clicked[1].style.background = "black";
+		not_available.pop();
+		not_available.pop();
+		current_Score = current_Score - 1;
+		currentScore[0].innerHTML = current_Score
+	}
 
+	//Correct Answer - Update Score
 	else{
-		console.log("correct");
+		current_Score = current_Score + 1;
+		currentScore[0].innerHTML = current_Score
+
 	}
 
 }
 
 
 
-//My Play Function - It willc all all methods in an organized manner
-/*
-Steps for loading game:
-1) Set Color of Boxes
-
-
-*/
-function play(){
+function init(){
 	get_colors(6);
+	colors = shuffle(colors);
 	console.log(colors);
-	setListeners()
+	setListeners();
 }
 
 
-play();
+
+function resetGame(){
+	//Set all blocks back to black
+	for (var i = 0; i < boxes.length; i++) {
+			boxes[i].style.background = "black";}
+
+	if(current_Score > max_score){
+		max_score = current_Score;
+		maxScore[0].innerHTML = max_score;
+	}
+	current_Score = 0;
+	currentScore[0].innerHTML = current_Score;
+
+	colors = [];
+	clicked = [];
+	not_available = [];
+	get_colors(6);
+	colors = shuffle(colors);
+
+}
+
+
+init();

@@ -5,3 +5,9 @@ The Idea Behind This Game :
 
 
 
+To Do:
+
+Work On Shuffle Method
+Reset Button
+Score Keeping
+

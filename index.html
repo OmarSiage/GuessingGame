@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css">
-
+	<link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div class="container" id="header">
@@ -13,8 +13,13 @@
 	</div>
 
 
-	<div class="container text-center">
-		<h3>Score <span><button class="btn btn-danger">reset</button></span></h3>
+	<div class="container text-center" id="score_bar">
+		<div class="d-flex justify-content-around align-items-center my-3">
+			<h3> Current Score : <span class="currentScore"> 0 </span></h3>
+			<button class="btn btn-danger" id="resetButt">Reset</button>
+			<h3>Best Score : <span class="bestScore"> 0 </span></h3>
+
+		</div>
 	</div>
 
 
