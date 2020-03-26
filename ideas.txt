@@ -1,3 +1,5 @@
+Simple web game with the purpose of helping better understand DOM manipulation.
+
 The Idea Behind This Game : 
 -> 12 Boxes Are Displayed
 -> Once Clicked - A Color is Displayed
