@@ -1,0 +1,7 @@
+The Idea Behind This Game : 
+-> 12 Boxes Are Displayed
+-> Once Clicked - A Color is Displayed
+-> You need to Click Another Box and Try Matching The Color
+
+
+
