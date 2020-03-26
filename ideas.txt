@@ -4,6 +4,8 @@ The Idea Behind This Game :
 -> You need to Click Another Box and Try Matching The Color
 
 
+The second box selected is purposely not displayed.
+
 
 To Do:
 
